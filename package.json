@@ -20,6 +20,7 @@
   "homepage": "https://github.com/jwiberg/train-data-service#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "lowdb": "^1.0.0",
     "standard": "^13.1.0"
   }
 }
