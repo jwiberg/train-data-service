@@ -9,10 +9,10 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs')
 
-app.get("/", (req, res) => {
-  res.render("index")
+app.get('/', (req, res) => {
+  res.render('index')
 })
 
 app.get('/data_for_train/:train_id', (req, res) => {
@@ -21,14 +21,14 @@ app.get('/data_for_train/:train_id', (req, res) => {
 
 app.post('/reserve', (req, res) => {
   const seats = JSON.parse(req.body.seats)
-  const bookedSeats = [];
+  const bookedSeats = []
   seats.forEach((seat) => {
     if (db.get(`trains.${req.body.train_id}.seats.${seat}.booking_reference`).value()) {
       bookedSeats.push(seat)
     }
   })
 
-  if(bookedSeats.length > 0) {
+  if (bookedSeats.length > 0) {
     res.status(409)
     res.send(`Seats ${bookedSeats.join()} already booked.`)
   } else {
