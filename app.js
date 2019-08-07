@@ -1,17 +1,39 @@
 const express = require('express')
 const port = process.env.PORT || 3000
-const app = express()
 const fs = require('fs')
 const low = require('lowdb')
 const Memory = require('lowdb/adapters/Memory')
 const db = low(new Memory())
+const bodyParser = require('body-parser')
+
+const app = express()
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 app.get('/data_for_train/:train_id', (req, res) => {
-  res.send(JSON.stringify(db.get('trains.' + req.params.train_id).value()))
+  res.send(JSON.stringify(db.get(`trains.${req.params.train_id}`).value()))
 })
 
 app.post('/reserve', (req, res) => {
-  res.send("Reserved or not")
+  const seats = JSON.parse(req.body.seats)
+  const bookedSeats = [];
+  seats.forEach((seat) => {
+    if (db.get(`trains.${req.body.train_id}.seats.${seat}.booking_reference`).value()) {
+      bookedSeats.push(seat)
+    }
+  })
+
+  if(bookedSeats.length > 0) {
+    res.status(409)
+    res.send(`Seats ${bookedSeats.join()} already booked.`)
+  } else {
+    seats.forEach((seat) => {
+      db.get(`trains.${req.body.train_id}.seats.${seat}`)
+        .assign({ booking_reference: req.body.booking_reference })
+        .write()
+    })
+    res.send('Seats succesfully booked!')
+  }
 })
 
 app.listen(port, () => {
