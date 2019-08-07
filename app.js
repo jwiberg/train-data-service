@@ -9,6 +9,11 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.set('view engine', 'ejs');
+
+app.get("/", (req, res) => {
+  res.render("index")
+})
 
 app.get('/data_for_train/:train_id', (req, res) => {
   res.send(JSON.stringify(db.get(`trains.${req.params.train_id}`).value()))
