@@ -1,0 +1,25 @@
+{
+  "name": "train-data-service",
+  "version": "1.0.0",
+  "description": "Train data service for Kata: Train Reservation (https://github.com/emilybache/KataTrainReservation)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwiberg/train-data-service.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jwiberg/train-data-service/issues"
+  },
+  "homepage": "https://github.com/jwiberg/train-data-service#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "standard": "^13.1.0"
+  }
+}
