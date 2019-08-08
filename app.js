@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/data_for_train/:train_id', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(db.get(`trains.${req.params.train_id}`).value()))
 })
 
