@@ -1,5 +1,5 @@
 # train-data-service
-Train data service for Kata: Train Reservation (https://github.com/emilybache/KataTrainReservation)
+Train data service for Kata: Train Reservation [Check usage and specification](https://github.com/emilybache/KataTrainReservation)
 
 Heroku base address: https://gentle-brushlands-56642.herokuapp.com/ 
 
